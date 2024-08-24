@@ -5,7 +5,7 @@ public ref struct ReadOnlySpanEnumerator<T>(ReadOnlySpan<T> span) : IRefStructEn
     readonly ReadOnlySpan<T> span = span;
     int index = -1;
 
-    public ReadOnlySpanEnumerator<T> GetEnumerator() => new (span);
+    public  readonly ReadOnlySpanEnumerator<T> GetEnumerator() => new (span);
 
     public T Current => span[index];
 

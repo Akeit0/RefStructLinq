@@ -7,7 +7,7 @@ public ref struct WhereEnumerator<T, TEnumerator>(TEnumerator enumerator, Func<T
     TEnumerator enumerator = enumerator;
 
 
-    public WhereEnumerator<T, TEnumerator> GetEnumerator()=>
+    public readonly WhereEnumerator<T, TEnumerator> GetEnumerator()=>
         new(enumerator.GetEnumerator(), predicate);
 
     public T Current => enumerator.Current;

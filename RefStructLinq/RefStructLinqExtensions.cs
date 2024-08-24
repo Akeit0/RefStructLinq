@@ -13,18 +13,18 @@ public static class RefStructLinqExtensions
         => new(new(span));
 
 
-    public static RefStructIterator<T,  WhereEnumerator<T, TEnumerator>>
+    public static  RefStructIterator<T,  WhereEnumerator<T, TEnumerator>>
         Where<T,  TEnumerator>(in this RefStructIterator<T, TEnumerator> enumerable, Func<T, bool> predicate)
         where TEnumerator : struct, IRefStructEnumerator<T,TEnumerator>, allows ref struct
         where T : allows ref struct
-        => new(new( enumerable.GetEnumerator(), predicate));
+        => new(new( enumerable.Enumerator, predicate));
 
     public static RefStructIterator<TOut, SelectEnumerator<T, TOut, TEnumerator>>
         Select<T, TOut,TEnumerator>(in this RefStructIterator<T, TEnumerator> enumerable, Func<T, TOut> transform)
         where TEnumerator : struct, IRefStructEnumerator<T,TEnumerator>, allows ref struct
         where T : allows ref struct
         where TOut : allows ref struct
-        => new(new(enumerable.GetEnumerator(), transform));
+        => new(new(enumerable.Enumerator, transform));
 
 
     public static RefStructIterator<T,  ReadOnlySpanEnumerator<T>> ToRefStructEnumerable<T>(this Span<T> span)

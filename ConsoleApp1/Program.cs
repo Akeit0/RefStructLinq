@@ -10,15 +10,10 @@ foreach (var text in s.SplitEnumerable(" "u8)
     Console.WriteLine(text);
 }
 
-var s2 = s.ToRefStructEnumerable()
-    .Where(x => char.IsUpper((char)x));
-foreach (var c in s2)
-    
-{ Console.WriteLine((char)c);
-    foreach (var c2 in s2)
-    {
-        Console.WriteLine((char)c2);
-    }
+foreach (var c in s.ToRefStructEnumerable()
+             .Where(x => char.IsUpper((char)x)))
+{ 
+    Console.WriteLine((char)c);
 }
 
 // Output:

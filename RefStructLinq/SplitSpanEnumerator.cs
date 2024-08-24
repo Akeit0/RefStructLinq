@@ -7,7 +7,7 @@ public ref struct SpanSplitEnumerator<T>(ReadOnlySpan<T> span, ReadOnlySpan<T> s
     ReadOnlySpan<T> span = span;
     readonly ReadOnlySpan<T> separator = separator;
     
-    public SpanSplitEnumerator<T> GetEnumerator()=>
+    public  readonly SpanSplitEnumerator<T> GetEnumerator()=>
         new (span, separator);
 
     public ReadOnlySpan<T> Current => span[enumerator.Current];
