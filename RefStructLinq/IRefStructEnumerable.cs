@@ -1,19 +1,10 @@
 ﻿namespace RefStructLinq;
 
-public interface IRefStructEnumerable<TElement, out TEnumerator>
-    where TElement: allows ref struct
-    where TEnumerator  : IRefStructEnumerator<TElement>, allows ref struct
-{
-    TEnumerator GetEnumerator();
-}
 
-
-public readonly ref struct RefStructEnumerable<TElement, TEnumerable, TEnumerator>(TEnumerable enumerable) : IRefStructEnumerable<TElement, TEnumerator>
+public readonly ref struct RefStructIterator<TElement,  TEnumerator>(TEnumerator enumerable)
     where TElement : allows ref struct
-    where TEnumerable : IRefStructEnumerable<TElement, TEnumerator>, allows ref struct
-    where TEnumerator : IRefStructEnumerator<TElement>, allows ref struct
+    where TEnumerator : IRefStructEnumerator<TElement,TEnumerator>, allows ref struct
 {
-    public readonly TEnumerable Enumerable = enumerable;
-    
-     public TEnumerator GetEnumerator() => Enumerable.GetEnumerator();
+    readonly TEnumerator enumerable = enumerable;
+    public TEnumerator GetEnumerator() => enumerable.GetEnumerator();
 }

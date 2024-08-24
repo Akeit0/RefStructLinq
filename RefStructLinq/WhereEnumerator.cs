@@ -1,10 +1,14 @@
 ﻿namespace RefStructLinq;
 
-public ref struct WhereEnumerator<T, TEnumerator>(TEnumerator enumerator, Func<T, bool> predicate) : IRefStructEnumerator<T>
+public ref struct WhereEnumerator<T, TEnumerator>(TEnumerator enumerator, Func<T, bool> predicate) : IRefStructEnumerator<T,WhereEnumerator<T, TEnumerator>>
     where T : allows ref struct
-    where TEnumerator : IRefStructEnumerator<T>, allows ref struct
+    where TEnumerator : IRefStructEnumerator<T,TEnumerator>, allows ref struct
 {
     TEnumerator enumerator = enumerator;
+
+
+    public WhereEnumerator<T, TEnumerator> GetEnumerator()=>
+        new(enumerator.GetEnumerator(), predicate);
 
     public T Current => enumerator.Current;
 
